@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="print"></div>
+    <script src="05_iterator.js"></script>
+    <script>
+        // interface
+        // 1. 인터페이스란 사양에 맞는 값과 연결된 속성키의 세트
+        // 2. 어떤 Object라도 인터페이스 정의를 충족시킬 수 있다.
+        // 3. 하나의 Object는 여러개의 인터페이스를 충족시킬 수 있다.
+
+        // interface test
+        // 1. test라는 키를 갖고
+        // 2. 값으로 문자열인자를 1개 받아 불린 결과를 반환하는 함수가 온다.
+        // {
+        //     test(str){return true;}
+        // }
+
+        const object = {
+            test(str) {
+                return true;
+            }
+        }
+
+        const Test = class{
+            test(str) {
+                return true;
+            }
+        };
+
+        const test = new Test();
+
+        // 덕타이핑?!
+
+        // js interface 최소 18가지가 있다.
+
+        // 1. iterator interface
+            // 1) next라는 키를 갖고
+            // 2) 값으로 인자를 받지 않고 IteratorResultObject를 반환하는 함수가 온다.
+            // 3) IteratorResultObject는 value와 done이라는 키를 갖고 있다.
+            // 4) 이 중 done은 계속 반복할 수 있을지 없을지에 따라 불린값을 반환한다.
+        
+        const iterator = {
+            next(){
+                return {
+                    done: true, //조건이 만족하기전까진 false다
+                    value: 1
+                };
+            }
+        };
+
+        const iterator2 = {
+            data:[1,2,3,4],
+            next() {
+                return {
+                    done: this.data.length == 0,
+                    value: this.data.pop()
+                }
+            }
+        }
+
+        // iterable Interface
+        // 1. Symbol.iterator 라는 키를 갖고
+        // 2. 값으로 인자를 받지 않고 iterator Object를 반환하는 함수가 온다.
+        {
+            [Symbol.iterator](){
+                return {
+                    next(){
+                        return {value:1, done:false};
+                    }
+                };
+            }
+        }
+
+        // Loop to iterator
+
+        // 사용자 반복처리기 - 직접 iterator 반복처리기를 구현
+
+        const loop = (iter, f) => {
+
+            // iterable 이라면 iterator를 얻음
+            if(typeof iter[Symbol.iterator] == 'function'){
+                iter = iter[Symbol.iterator]();
+            }else return;
+
+            // iteratorObject가 아니라면 건너뜀
+            if(typeof iter.next != 'function') return;
+
+            do{
+                const v = iter.next();
+                if(v.done) return; // 종료처리
+                f(v.value); // 현재 값을 전달함
+            }while(true);
+        };
+        
+        loop(iter, console.log);
+
+        // iterable 활용예시 
+        const iter = {
+            [Symbol.iterator](){return this;},
+            arr:[1,2,3,4],
+            next(){
+                return {
+                    done: this.arr.length == 0,
+                    value: this.arr.pop()
+                };
+            }
+        };
+        // 내장반복처리기
+
+        // 1) Array destructuring (배열해체)
+        const [a,...b] = iter;
+        console.log(a, b);
+        // 4, [3,2,1]
+
+        // 2) Spread (펼치기)
+        const a = [...iter];
+        console.log(a);
+        // [4,3,2,1]
+
+        // 3) Rest Parameter (나머지 인자) 함수의 인자 펼치기
+        const test = (...arg)=>console.log(arg);
+        test(...iter);
+        // [4,3,2,1]
+
+        // For of
+        for (const v of iter){
+            console.log(v);
+        }
+        //4
+        //3
+        //2
+        //1
+
+        // Practice - 제곱을 요소로 갖는 가상컬렉션
+        const N2 = class {
+            constructor(max){
+                this.max = max;
+            }
+            [Symbol.iterator](){
+                let cursor = 0, max = this.max;
+                return {
+                    done:false,
+                    next(){
+                        if(cursor > max){
+                            this.done = true;
+                        }else{
+                            this.value = cursor * cusror;
+                            cursor++;
+                        }
+                        return this;
+                    }
+                };
+            }
+        };
+        // 함수는 원래 인자와 지역변수만 쓸 수 있는데 그게 아닌 뭔가를 사용하는게 자유변수다.
+        // 자유변수(free valuable) - 함수는 함수가 만들어진 시점에 함수 바깥에 있는 변수를 캡쳐해서 지역변수처럼 참고해서 사용할 수 있다.
+
+        console.log([...new N2(5)]);
+        // [0,1,4,9,16]
+
+        for(const v of new N2(5)){
+            console.log(v);
+        }
+
+        // Generator
+        // 1) Iterator의 구현을 돕는 Generator
+        const generator = function*(max){
+            let cursor = 0;
+            while(cursor < max){
+                yield cursor * cursor;
+                cursor++;
+            }
+        };
+
+        console.log([...generator(5)]);
+        // [0,1,4,9,16]
+
+        for(const v of generator(5)){
+            console.log(v);
+        }
+
+        // iterator 이자 iterator result object
+        // 배열은 iterable 이자 iterator 객체이다.
+        // generator 가 반환하는 iterator는 iterable 이다
+        // for of 뒤에는 generator 가 못온다
+
+        // 함수는 루틴
+        // generator는 코르틴이라고 부른다.
+
+    </script>
+</body>
+</html>

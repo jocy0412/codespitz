@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="display: none;">
+        <!-- <script>
+            // prototype 링크
+            const buzz = {
+                flying:true,
+                riding:false
+            }
+
+            const woody = Object.create(buzz);
+            // // 우디가 날 수 있게 되었다!
+            woody.flying; // true
+
+            console.log(woody);
+            console.log(woody.flying);
+
+            for(let i in woody){
+                console.log(`${i}를 발견`)
+            }
+
+            // Prototype Object는 기본속성으로 constructor 와 __proto__를 가지고 있다.
+
+            // constructor는 내가 선언한 생성자 함수를 가리킨다. new 키워드와 함께 호출할 경우 constructor함수를 실행하고 부수효과로 객체가 생성된다.
+            // constructor는 생성자 함수가 아니라 함수를 생성하는 호출이라고 생각하는 것이 맞다.
+
+            // prototype은 생성자 함수에 정의한 모든 객체가 공유할 원형이다.
+            // proto는 [[Prototype]] 링크이다. 생성자 함수에 정의해두었던 prototype을 참조한다.
+        </script> -->
+
+        - prototype 설명
+        <!-- <script>
+            console.log('prototype 코드');
+            function PersonType(name) {
+            this.name = name;
+            }
+            // PersonType은 name이라는 단일 프로퍼티를 생성하는 생성자 함수입니다.
+
+            PersonType.prototype.sayName = function () {
+            console.log(this.name);
+            };
+            // sayName() 메서드는 프로토 타입에 할당되어 동일한 함수가 PersonType 객체의 모든 인스턴스에 의해 공유
+
+            let person = new PersonType("Nicholas");
+            // Person의 새로운 인스턴스가 new 연산자를 통해 생성
+
+            // person 객체는 프로토 타입 상속을 통해 PersonType과 Object 인스턴스로 간주됩니다.
+
+            person.sayName(); // outputs "Nicholas"
+            console.log(person instanceof PersonType); // true
+            console.log(person instanceof Object); // true
+        </script> -->
+
+        - class 설명
+        <!-- <script>
+            console.log('class 코드');
+
+            class PersonClass {
+                // PersonType 생성자와 동일합니다.
+                constructor(name) {
+                    this.name = name;
+                }
+                // PersonType.prototype.sayName과 동일합니다.
+                sayName() {
+                    console.log(this.name);
+                }
+            }
+            let person = new PersonClass("Nicholas");
+            person.sayName(); // outputs "Nicholas"
+            console.log(person instanceof PersonClass); // true
+            console.log(person instanceof Object); // true
+            console.log(typeof PersonClass); // "function"
+            console.log(typeof PersonClass.prototype.sayName); // "function"
+        </script> -->
+    </div>
+
+
+
+</body>
+</html>

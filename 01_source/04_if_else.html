@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // if문
+        // if문의 구성은: if (식) 문
+        // if () {} 옵셔널 문장, 선택적이다.
+        // if () else {} 멘데토리 문장, 필수적이다, 도망갈 수 없다
+        
+        // ()의 기능 
+        // 1. 우선순위 연산자, 2. 제어문에 들어가는 형식 기호 3. 함수를 호출 할때 호출식 연산자
+        
+        // 옵셔널 문장
+        if (ex) {st}
+
+        // 멘데토리 문장
+        if (true) 3; else 5
+        if (ex) st; else st
+        if (true) {3;} else {5}
+
+
+        
+
+        const c = 3;
+        // 이 if else 문법의 의미는 ?
+        if(c === 1){
+
+        } else if(c === 2) {
+
+        } else if(c === 3) {
+
+        }
+
+        // 이 방식을 말하는 것을 말한다.
+        if (c === 1) {
+
+        } else {
+            if (c === 2) {
+            
+            } else {
+                if (c === 3) {
+                    
+                } else {
+                
+                }
+            }
+        }
+        // if 중첩은 서브 집합 관계일 때만 쓴다.
+        // 병행조건일때만 switch를 사용한다.
+
+        // else가 처리 될지 아닐지를 모른다. 멘데토리로 처리할때 내부도 멘데토리로 처리한다.
+        if (c === 1) {
+
+        } else {
+            if (c === 2) {
+            
+            } else{
+                // else 안에 들어온 if문은 else까지 써서 정확하게 만들어줘야한다.
+            }
+        }
+
+        if (c > 5) {
+        } else switch (c) {
+
+        }
+
+        if (c > 5) {
+        } else for (;;) {
+            
+        }
+
+
+        // for 문
+        for(ex; ex; ex) {
+
+        }
+
+        // 식인데 왜 문이 들어오는가? var i = 0;
+        // for문의 첫번째 인자에는 식 or 선언문 한정으로 문이 올 수 있다.
+        // for문의 두번째 인자에는 truthy 동안에 실행
+        // for문의 두번째 인자에 공문이 들어오면 일반적으로는 falsy이지만 for문 한정으로 truthy가 되어서 무한루프가 된다.
+        // for문의 세번째 인자에는 마지막에 실행
+        for(var i = 0; truthy; ex) {
+            '', false, 0, undefined, null, NaN // falsy
+
+            // for문의 세번째 인자값은 마지막에 실행되며 세번째 인자를 사용하지 않고 아래애 넣을 수도 있다.
+            // ex
+        }
+
+        // for의 예외사항 두번째 인자에 공문이 오는 경우 truthy로 평가
+        
+
+        // while 문
+        // 사용법 1 - while문은 반드시 중괄호에 truthy를 넣어야 실행이 된다.
+        while(truthy){
+
+        }
+        
+        // 사용법 2-1 - 조건식에 등장하는 상태가 바디에도 그 형태가 나와야한다.
+        var a = -1;
+        while(a > 0){
+            a++;
+        }
+
+        // 사용법 2-2 - 조건식에 나오는 상태가 있다면 바디에도 그 형태가 나와야한다.
+        // 안나오면 버그다.
+        var a = act.method().c;
+        while(a){
+            other.action();
+            a = act.method().c;
+        }
+
+        // 사용법  3 - test 해볼때
+        var a = act.method().c;
+        while(a){
+            let r = other.action();
+            a = act.method().c;
+            if (r === 'abc') a = false;
+        }
+
+        // do while 문
+        // 사용법 1
+        do {
+
+        } while (truthy){
+            
+        }
+
+        // 사용법 2 - do (문) while (식) 순으로 사용, 끝에 ;(세미콜론) 붙여야함
+        do a++; while (a);
+
+        // iteration 문
+        // for of, for in 방식
+        // for (of);
+        // for (in);
+
+
+
+    </script>
+</body>
+</html>

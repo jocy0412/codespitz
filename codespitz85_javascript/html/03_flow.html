@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Flow : 메모리에 적재된 명령이 순차적으로 실행
+
+    Flow Control
+        Sync flow : 메모리에 적재된 명령이 순차적으로 실행됨
+        Sync flow Control : Goto를 통해 명령을 위치를 이동함
+        Sub flow(Sub Routine) : 함수 등을 통해 별도의 명령셋을 여러번 실행함
+
+    설계는 코드 배치의 기술이다.
+
+    설계는 2가지로 귀결된다.
+    1. BIP (의존성 역전)
+        어떤 구체적인 사안에 의존하지 않고 추상적인 것에 의존
+
+    2. IOC (제어의 역전)
+        컨트롤 로직을 1개만 짜는 것
+
+
+    Blocking
+    - Sync Flow가 실행되는 동안 다른 일을 할 수 없는 현상
+
+    Blocking 줄이는 법
+    - sync flow를 짧게 하기
+    - 다른 쓰레드에 syncflow를 떠넘기기
+        다른 쓰레드의 작업이 완료되면 원래되면 원래 쓰레드에 보고해야함
+
+    Non Blocking Sycn Flow가 납득할 만한 시간 내에 종료되는 것
+
+    Sync & Async (Sync flow의 Sync와 다르다. 고유명사다)
+    - Sync - 서브루틴이 즉시 값을 반환함
+    - Async - 서브루틴이 다른 수단으로 값을 반환함 (우리가 원하는 값을 즉시 리턴하지 않으면 Async다)
+        Promise, callback function, iterations
+
+    현업 개발자가 위와같은 프로그래밍이 어려운 이유
+    우리는 모든 프로그래밍 교육을 Sync flow의 Sync 로직을 짜는 것으로 프로그래밍을 배웠기 때문
+
+    Async 단점
+    호출결과가 즉시 반환되지 않으므로 현재의 sync flow가 종료됨
+    그 결과 현재의 어휘공간 내의 상태를 결과시점에 사용할 수 없음
+    요청 시의 상태를 별도로 결과시점에 전달할 부가장치 필요
+
+    Sync의 장점 + Async의 장점
+    sync로직으로 async를 사용할 수 있게 함
+    하지만 sync flow가 어긋나므로 이전 sync flow를 상태를 기억하여 이어줄 장치 필요
+    상태를 기억하고 이어주는 장치 - Continuation
+    이를 활용하는 프로그래밍스타일 - Continuation Passing Style (CPS)
+
+
+
+</body>
+</html>

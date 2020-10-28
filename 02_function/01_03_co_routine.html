@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // single routine(한번 실행)
+
+        // co routine(여러번 실행)
+
+        // yield를 사용하면 서스펜션이 걸린다.
+
+        const generator = function*(a){
+            a++;
+            yield a;
+            a++;
+            yield a;
+            a++;
+            yield a;
+        }
+
+        const coroutine = generator(3);
+
+        // generator의 호출의 결과 값이 co routine다.
+        // co routine을 만들어 주는게 generator다.
+
+        let result = 0;
+        result += coroutine.next().value;
+        console.log(result);    // 4
+        result += coroutine.next().value;
+        console.log(result);    // 9
+        result += coroutine.next().value;
+        console.log(result);    // 15
+
+    </script>
+</body>
+</html>

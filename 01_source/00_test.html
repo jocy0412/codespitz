@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // yield
+        // odd
+        var f1 = (1 % 2),
+        f2=(2 % 2),
+        f3=(3 % 2),
+        f4=(4 % 2),
+        f5=(5 % 2);
+
+        console.dir(f1);
+        console.dir(f2);
+        console.dir(f3);
+        console.dir(f4);
+        console.dir(f5);
+
+        
+
+        const odd = function*(data){
+            for(const v of data){
+                console.log("odd", odd.cnt++);
+                if(v % 2) yield v;
+                console.log(v);
+            }
+        };
+        odd.cnt = 0;
+        for(const v of odd([1,2,3,4,5,6,7,8])) console.log(v);
+    </script>
+</body>
+</html>

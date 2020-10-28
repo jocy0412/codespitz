@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        OOAD
+        대화형 방식의 프로그래밍은 흐름에 맞춰서 프로그램이 어떻게 반응할지를 정한다. (전체적인 흐름을 직접 제어하지 않음)
+
+        Tetris
+        데이터 분석의 결과가 객체지향에 맞게 프로그래밍 하는 것이 목표
+
+
+
+
+    </div>
+
+    <script>
+        // Tetris
+
+        // 1. Stage
+        const prop = (target, v)=>Object.assign(target, v); // *공부 Object.assign
+        const Stage = class{
+            constructor(last, min, max, listener){
+                prop(this, {last, min, max, listener})
+            }
+            clear(){
+                this.curr = 0;
+                this.next();
+            }
+            next(){
+                if(this.curr++ < Stage.last){
+                    const rate = (this.curr - 1) / (this.last - 1);
+                    this.speed = this.min + (this.max - this.min) * (1 - rate);
+                    this.listener();
+                }
+            }
+            // 점수계산
+            score(line){
+                return parseInt((this.curr * 5) * (2 ** line));
+            }
+        }
+
+        // 2. Score
+        const Score = class{
+            constructor(stage, listener){
+                prop(this, {stage, listener});
+            }
+            clear(){this.curr = this.total = 0;}
+            add(line){
+                const score = this.stage.score(line);
+                this.curr += score;
+                this.total += score;
+                this.listener();
+            }
+        }
+
+        const Block = class{
+            constructor(color){prop(this, {color, rotate:0});}
+            left(){if(--this.rotate < 0) this.rotate = 3;}
+            right(){if(++this.rotate > 3) this.rotate = 0;}
+            getBlock(){throw 'override!';}
+        }
+        // const blocks = [class extends Block, ....];
+        const blocks = [
+            class extends Block{
+                constructor(){super('#fcbad8');}
+                getBlock(){
+                    return this.rotate % 2 ?
+                    [[1],[1],[1],[1]] :
+                    [[1,1,1,1]];
+                }
+            }
+        ];
+        
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="display:none;">
+        None Blocking Javascript
+
+            - Concurrency(동시성 - 마치 동시에 일어나는 것 같은 것, 철학적인 동시성과는 다르다)
+            JS를 만든 브렌던 아이크(Brendan Eich)가 제시한 자바스크립트 모델에서는 동시성 밖에 없었다.
+            Memory를 같이 사용할 경우 문제가 생기기 때문에
+
+            - Parallelism(병행성, 병렬성 - 정말로 동시에 일어난 것)
+            Task에 할당되는 각각의 worker가 별도로 존재해서 자기만의 속도와 스케쥴을 따라서 일을 처리하는 것
+
+            함수형 프로그래밍은 공유하는 메모리를 한쪽만 쓰도록 설정함
+            객체지향은 둘다 사용이 가능하지만 해결하는 방법을 찾아야함
+
+        JavaScript Concurrency
+
+        1. engine worker(rendering...) - Concurrency
+            js를 실행할 때 js코드에 영향을 받는 것을 실행할 때는 싱글 쓰레드를 사용
+        2. check queue
+            callback queue를 바라본다.
+        3. Run JS
+            callback queue가 있으면 js가 실행
+
+        여기까지는 싱글쓰레드로 동작하면서 Concurrency이다.
+
+        network, timer, message, dom event등은 멀티쓰레드로 처리해서 callback queue로 보내준다.
+
+        callback queue를 중심으로
+        [engine worker, check queue, RunJS] 위는 concurrency이지만
+
+        ----------- callback queue -----------
+
+        [network, timer, message, dom event] 아래는 Parallelism을 가지고 있다.
+
+
+        setTimer
+
+    </div>
+
+    <script>
+        const Item = class{
+            time; // field 영역
+            block; // field 영역
+            constructor(block, time){
+                this.block = block;
+                this.time = time + performance.now();
+
+                // Date.now(); - UX 타임 1970년 1월 1일 0분 0시 0초 부터 0값으로부터 올라가는 것
+                // performance.now(); 브라우저가 켜지고 나서부터 얼마나 지난 시간인지, 나노 초까지 볼 수 있다.
+            }
+        };
+
+        const queue = new Set;
+        // 배열에 담을 수 있는 것은 사실상 값 밖에 없다고 생각 해야된다.
+        // 수학적 프로그래밍은 값이라는 context를 사용, 메모리에는 다를지라도 같다. 안에 있는 값이 같기 때문, 값은 여러번 중복이 가능하다.
+        // 객체지향에 대한 객체의 컬렉션은 Set에 넣어야한다.
+
+        const f = time =>{
+            queue.forEach(item=>{
+                if(item.time > time) return;
+                queue.delete(item);
+                item.block();
+            });
+            requestAnimationFrame(f);
+        };
+        requestAnimationFrame(f);
+
+        const timeout = (block, time)=>queue.add(new Item(block, time));
+        timeout(_=>console.log("hello"), 1000);
+    </script>
+
+</body>
+</html>

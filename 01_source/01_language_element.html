@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Language Element & Flow control
+        1. Lexical Grammar
+            1) Control Character - 제어 문자
+            2) White Space - 공백문자
+            3) Line Terminators - 개행문자
+            4) Comments - 개행문자 (주석)
+            5) Keyword - 예약어 (약속된 언어)
+            6) Literals - 리터럴 (언어에서 정의한 더 이상 쪼갤 수 없는 값의 표현: 참 값 = true는 t,r,u,e로 나눌 수 없다), 값리터럴, 객체리터럴, 배열리터럴, 함수리터럴
+        
+        2. Language Element
+            1) Statements - 문
+                공문 - ;;; 아무것도 없는 문
+                
+                식문 - 3-5; or 3;2;5; 하나의 식을 문으로 만듬
+                
+                제어문 - 
+                
+                선언문 - Identifier를 선언하기 위한 문
+                
+                단문
+
+                중문 
+                단문이 오는 곳에 중문이 올 수 있음
+
+            2) Expression - 식(최종적으로 하나의 값에 수용되는 것, 식은 값의 확장된 표현)
+                값식 == 3, true, abc 등등
+                연산식 == 1+1 
+                    연산자의 종류에 따른 구분법
+                    (1) 항의 수로 연산자 구분하거나 - 일항,이항,삼항,다항(a,b,c,d의 결과는 d)
+                    (2) 연산자의 목적에 따라서 연산자를 구분 - 산술 연산자, 논리 연산자                    
+                    
+
+                호출식 == a() - 함수를 호출
+
+                값은 저장하지 않으면 메모리에서 휘발함, 그렇기 때문에 값을 변수에 저장해야됨
+
+            3) Identifier - 식별자 (특별한 이름을 지정하는 행위를 식별자라고 한다)
+                
+                식별자가 값을 담는 형태가 2가지(기본형, 참조형)
+                기본형(Primitive values) - 복사되는 타입의 값
+                Boolean, Null, Undefined, Number, String, Symbol(문자, 숫자, 불린)
+
+                참조형(Reference type) - 참조만 복사되는 타입
+                
+
+                변수란? 여러번 값을 바꿀 수 있음
+                1) 메모리 주소의 별명을 가지고 있고 2) 해당 값의 타입 정보를 가지고 있음
+
+                일반적인 언어의 변수의 특징
+                변수 Life cycle을 가진다
+                접근 제어 - 어떤 변수는 접근하고 어떤 변수를 접근하지 못하는 것 이것을 scope라고 한다.
+
+                JS의 변수는 Life cycle을 scope라고 함
+                함수의 인자, 함수안의 지역 변수, 블록 안에 생성된 블록스코프, 멤버변수 class의 인스턴스 속성인 멤버변수
+
+                상수란? 한번 대입되면 값을 바꿀 수 없음
+                변수를 사용할 때의 원칙 무조건 상수로 하고 변해야될 이유가 있을때 변수로 작업한다.
+                이유 - 변화가능성을 줄임으로 복잡성을 낮추기 위해
+
+                자유변수란?
+                1. 지역변수와 인자가 아니면 다 자유변수다.
+
+                class의 메서드가 알 수 있는 this로 시작되는 멤버변수, 함수의 인자, 지역 변수 이것이 아니라면 메서드 입장에서는 나머지는 자유변수다
+
+                
+                클로져
+                쓸 수 있는 자유변수들이 사용될 수 있는 공간을 클로져라고 한다.
+                
+
+        
+        Artificial language - 인공어
+
+        
+        이과가 컴공을 잘하는 이유
+
+        문과는 범위 한정 공부를 잘한다
+        이과는 앞에 공부를 통해서 뒤에 공부를 함
+</body>
+</html>

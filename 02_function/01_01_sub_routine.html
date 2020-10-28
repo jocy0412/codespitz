@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // fucntion & OPP (함수와 객체지향)
+
+        // Sub Routine Flow
+        
+        // 에로우 펑션만 쓴다. function이란 키워드는 안쓴다.
+        const routineA =b=>{
+            const result = b * 2;
+            console.log(result);
+            return result;
+        };
+        const routineB =d=>{
+            const result = d * 3;
+            console.log(result);
+            return result;
+        };
+
+        const b = 10, d = 30;
+        const a = routineA(b);
+        console.log(a); // 20
+        const c = routineB(d);
+        console.log(c); // 90
+
+        // Value VS Reference
+
+        // 값은 언어에서 정한다.
+        // JS에서는 문자열을 값으로 본다, java는 참조로 본다
+        
+        // 언어에서 값으로 볼 값을 프리머티브 타입(number,string,boolean,undefined,none,null,symbol)
+
+        // 언어가 value(값)을 정하면 나머진 reference(참조)다.
+
+
+
+        
+
+    </script>
+</body>
+</html>

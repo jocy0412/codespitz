@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // yield
+        // odd
+        const odd = function*(data){
+            for(const v of data){
+                console.log("odd", odd.cnt++);
+                if(v % 2) yield v;
+            }
+        };
+        odd.cnt = 0;
+        for(const v of odd([1,2,3,4])) console.log(v);
+
+        // take
+        const take = function*(data, n){
+            for(const v of data){
+                console.log("take", take.cnt++);
+                if(n--) yield v; else break;
+            }
+        };
+        take.cnt = 0;
+        for(const v of take([1,2,3,4], 2)) console.log(v);
+
+        for(const v of take(odd([1,2,3,4]), 2)) console.log(v);
+    </script>
+</body>
+</html>

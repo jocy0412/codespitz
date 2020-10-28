@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- [D] 한줄로 정렬하면 -->
+    <div>a<a>b</a>c<img/>d</div>
+
+    <!-- [D] 들여쓰기하면 -->
+    <div>
+        a
+        <a>b</a>
+        c
+        <img/>
+        d
+    </div>
+
+    <!-- 
+        HTML PARSER 만들기 
+        
+        HTML의 구조
+        A = <tag>body</tag>
+        B = <tag/>
+        C = Text
+
+        BODY = (A | B | C)N        
+    -->
+    <script>
+        // HTML PARSER
+
+        // 기능 구조
+
+        const textNode = (input, cursor, curr)=>{
+            const idx = input.indexOf('<', cursor);
+            curr.tag.children.push({
+                type:'text', text:input.substring(cursor, idx)
+            });
+            return idx;
+        };
+
+        const elementNode = (input, cursor, idx, curr, stack)=>{
+            // let name, isClose;
+            // if(input[idx - 1] === '/'){
+            //     name = input.substring(cursor + 1, idx - 1), isClose = true;
+            // }else{
+            //     name = input.substring(cursor + 1, idx), isClose = false;
+            // }
+            // const tag = {name, type:'node', children:[]};
+
+            // 위의 것을 줄이면 아래와 같이 된다
+            const isClose = input[idx - 1] === '/';
+            const tag = {name: input.substring(cursor + 1, idx - (isClose ? 1 : 0)), type:'node', children:[]};
+
+            curr.tag.children.push(tag);
+            if(!isClose){
+                stack.push({tab, back:curr});
+                return true;
+            }
+            return false;
+        };
+
+        // parser 구조
+
+        const parser = input=>{
+            input = input.trim();
+            const result = {name:'ROOT', type:'node', children:[]};
+            const stack = [{tag:result}];
+            let curr, i = 0, j = input.length;
+            while(curr = stack.pop()){
+                while(i < j){
+                    const cursor = i;
+                    if(input[cursor] === '<'){
+                        //A, B의 경우
+                        const idx = input.indexOf('>', cursor);
+                        i = idx + 1;
+                        if(input[cursor + 1] === '/'){
+                            curr = curr.back;
+                        }else{
+                            if(elementNode(input, cursor, idx, curr, stack)) break;
+
+                            // let name, isClose;
+                            // if(input[idx - 1] === '/'){
+                            //     name = input.substring(cursor + 1, idx - 1), isClose = true;
+                            // }else{
+                            //     name = input.substring(cursor + 1, idx), isClose = false;
+                            // }
+                            // const tag = {name, type:'node', children:[]};
+                            // curr.tag.children.push(tag);
+                            // if(!isClose){
+                            //     stack.push({tab, back:curr});
+                            //     break;
+                            // }
+                        }
+                        
+                    }else i = textNode(input, cursor, curr); //C의 경우
+                    
+                    // textNode에 관한 코드
+
+                    // const idx = input.indexOf('<', cursor);
+                    // curr.tag.children.push({
+                    //     type:'text', text:input.substring(cursor, idx)
+                    // });
+                    // i = idx;
+                }
+            };
+            return result;
+        };
+
+        // 과제: 재귀함수로 바꿀 것, stack 제거하고 돌리기
+        // json parser만들기 - 큰 따옴표, 작은 따옴표(문자열) 안의 중괄호, 대괄호는 object나 배열의 시작이 아니다.
+
+    </script>
+</body>
+</html>

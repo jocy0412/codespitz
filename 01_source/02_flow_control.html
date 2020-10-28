@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    1. RECORD
+        우선 자바스크립트의 기본적인 ‘문’처리 방식을 배울 필요가 있다.
+        자바스크립트는 ‘문’을 해석할 때 ‘식’하고는 다르게 해석한다.
+        ‘식’은 하나의 ‘값’으로 처리될 뿐이다.
+        그런데 ‘문’은 하나의 실행 단위로 해석이 된다.
+        그래서 우리가 문을 10개를 작성하면 10개의 실행 단위가 생긴다.
+        그에 비해 ‘식’은 아무리 많이 써봐야 ‘값’으로 수렴할 뿐이다.
+        자바스크립트는 우리가 ‘문’의 갯수를 늘리면 ‘문’의 갯수만큼 우리가 처리해야할 과제로 삼는다.
+        따라서 한줄한줄 ‘문’이 생길 때마다 자바스크립트는 이를 ‘과제’로 등록한다.
+        이 ‘과제’를 RECORD라고 부른다. 
+        Statement(문) - > Record(레코드)로 등록
+        즉 자바스크립트는 문을 레코드로 등록하고 이 레코드를 하나하나 소비해나가며 과제를 해결한다.
+
+        COMPLETION RECORD
+        Flow control을 할 수 있는 제어문을 record로 바꿀 때는 Completion record라는 것으로 바뀐다.
+        Completion Record는 어떤 레코드를 선택할지를 결정하는데 사용된다
+
+    2. Sync Flow
+
+        애니악의 탄생
+        미국정부는 2차세계 대전 당시 미적분을 빨리해서 마사일 탄도 계산하는 기게를 원했는데 그게 애니악의 탄생한 이유다. IBM도 그렇다.
+        처음에는 10진수 컴퓨터를 만들었다. 0~10volt를 나눠서 보냈음, 이러한 전기의 전압을 나눠주는 소자가 진공관이었다.
+        진공관의 소자는 수명이 2~3분안에 깨지면서도 계산을 해나감
+        진공간이 깨지고, 전류의 불안정으로 인해 값의 오류가 발생
+
+        이러한 문제를 해결하기 위해 폰 노이만 박사에 의해서 폰 노이만 머신이 만들어짐
+        오퍼렌드 + 어큠레이터 를 
+        
+        메모리에 적재 되어있는 프로그램을 소비하는 과정을 Flow 라고 한다.
+
+        동기화 명령
+        적재 되어있는 프로그램이 한번에 소비되고 CPU를 중지시킬 수도 아무것도 못하는 상황
+
+        Sync Flow
+        좌에서 우로, 위에서 아래로 실행되는 상태를 말함
+
+        abc 언어의 예외는 equal 이다. 오른쪽에서 왼쪽으로
+
+        Sync flow control statements
+
+        routine
+        루틴이 시작되서 끝나는 플로우
+
+        coroutine?
+        복잡한 플로우 제어
+    
+    3. LABEL
+        go to - 이전에는 점프 시킬 때 코드 라인으로 점프 했었지만 현대코드는 label의 이름으로 점프를 시킴
+        
+        1. 특징
+            1) label 외에 실제로 존재하는 ‘문’이 하나도 없으면 에러가 발생한다.
+            2) label은 내부적으로 ‘문’이 아니라는 뜻이다.
+            3) label은 브라우저 해석기가 볼 때는 ‘문’이 아니라는 것.
+            label은 레코드에 달아주는 일종의 TAG(꼬리표) 같은 녀석인 것이다.
+        
+        2. indentifier
+            1) JS변수 이름 규칙: 첫 글자가 알파벳, $, 언더바 그 이후의 문자는 알파벳, 숫자, $, 언더바
+            2) label indentifier 네이밍 규칙: JS변수 이름 규칙과 한가지만 다르다. $를 label 이름에 쓸 수 없음
+            3) label은 같은 스코프 내에서 같은 이름을 쓰면 오류가 뜬다. 
+            4) block scope를 사용해도 안된다
+            5) label이나 변수는 함수 스코프를 탄다. 우리가 label의 이름을 다른 이름을 쓰거나, 
+               같은 이름 쓰거나, 쉐도잉 일어나는 원리가 변수처럼 함수 스코프를 탄다.
+               label이 무엇을 가르치는지를 부르는 것을 label range라고 한다.
+
+        3. label range & set
+            label range를 이해하려면 label이 영역을 어떻게 가지는지 label set을 인식해야 한다.
+            위에선 label scope를 생성해주었지만 scope를 생성해주지 않았을 때, 
+            하나의 label이 어디까지 영역을 잡느냐는 것이다.
+
+            1) label에 특별한 무언가가 없다면 다음 label 까지를 범위로 삼는다.
+            2) label 다음에 Iteration(if, for, while..)이 오거나 switch문이 오면 범위를 한정짓는다.
+               label 다음에 for문이면 해당 label의 범위는 그 for문까지~! 다음 label이 없어도~!
+               break abc;를 했어도 다음으로 넘어가질 않는다.
+               위에서 label range는 특별한 경우가 없는 이상 다음 label 까지라고 했다.
+               하지만 break가 에러는 안 났지만 건너뛰진 않는다.
+               
+            break로 건너뛸 수 있게 하려면 반드시 다음 3가지 구문 중 한 가지를 사용하여 label을 써야된다.
+            1) label scope를 선언
+            2) iteration label이 되어라
+            3) switch label이 되어라
+
+            label 블록에서는 continue가 안된다.
+            continue는 iteration set에서만 사용가능하다
+
+            iteration set의 undefined name label 생성
+
+    4. switch 문
+        
+    
+    4. Function scope
+
+
+
+    현대의 loop 구문은 auto labeling, go to, stack clear 기능이 있음
+        
+
+
+
+        
+
+</body>
+</html>
