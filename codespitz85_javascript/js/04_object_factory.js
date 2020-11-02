@@ -1,9 +1,9 @@
-// constructor function (생성자(constructor) - 객체를 생성하는 것)
+// constructor function (생성자(constructor) - 객체를 생성하고 객체의 초기상태를 세팅)
 function Person(name, first, second, third){
-    this.name = name,
-    this.first = first,
-    this.second = second,
-    this.third = third,
+    this.name = name;
+    this.first = first;
+    this.second = second;
+    this.third = third;
     this.sum = function(){
         return this.first+this.second+this.third;
     }
