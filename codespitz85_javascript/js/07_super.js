@@ -18,11 +18,23 @@ class Person{
 
 //  "class 클래스1 extends 클래스2" 는 클래스2는 클래스1을 상속해서 사용한다.
 class PersonPlus extends Person{
+    constructor(name, first, second, third){
+        // super는 부모가 하지 못하는 상속 이후의 일을 처리할 때 쓴다.
+        super(name, first, second)
+        this.third = third;
+    }
+    sum(){
+        return super.sum()+this.third;
+    }
     avg(){
-        return (this.first+this.second)/2;
+        return (this.first+this.second+this.third)/3;
     }
 }
 
-var kim = new PersonPlus('kim', 10, 20);
+var kim = new PersonPlus('kim', 10, 20, 30);
 console.log("kim.sum()", kim.sum());
 console.log("kim.svg()", kim.avg());
+
+// super는 두가지의 용법
+// 1. super()는 부모 클래스의 생성자
+// 2. super. 는 부모 클래스 지칭한다고 보면 된다. super.method() 부모 클래스의 메소드 실행

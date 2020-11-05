@@ -9,11 +9,12 @@ function Person(name, first, second, third){
     }
 }
 
+// 함수를 호출할 때 new를 붙이면 객체를 생성하는게 된다.
 var kim = new Person('kim', 10, 20, 30);
 var lee = new Person('lee', 10, 10, 10);
-
 console.log("kim.sum()", kim.sum());
 console.log("lee.sum()", lee.sum());
+
 
 var d1 = new Date('2019-4-10');
 console.log('d1.getFullYear()', d1.getFullYear());
